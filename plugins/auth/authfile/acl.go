@@ -14,6 +14,12 @@ func Init() *aclAuth {
 	}
 }
 
+func InitWithConfig(aclConfig *ACLConfig) *aclAuth {
+	return &aclAuth{
+		config: aclConfig,
+	}
+}
+
 func (a *aclAuth) CheckConnect(clientID, username, password string) bool {
 	return true
 }

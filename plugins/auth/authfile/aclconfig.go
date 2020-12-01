@@ -44,13 +44,7 @@ func AclConfigLoad(file string) (*ACLConfig, error) {
 	return aclconifg, err
 }
 
-func (c *ACLConfig) Prase() error {
-	f, err := os.Open(c.File)
-	defer f.Close()
-	if err != nil {
-		return err
-	}
-	buf := bufio.NewReader(f)
+func (c *ACLConfig) PraseFromReader(buf *bufio.Reader) error {
 	var parseErr error
 	for {
 		line, err := buf.ReadString('\n')
@@ -104,6 +98,15 @@ func (c *ACLConfig) Prase() error {
 		}
 	}
 	return parseErr
+}
+func (c *ACLConfig) Prase() error {
+	f, err := os.Open(c.File)
+	defer f.Close()
+	if err != nil {
+		return err
+	}
+	buf := bufio.NewReader(f)
+	return c.PraseFromReader(buf)
 }
 func isCommentOut(line string) bool {
 	if strings.HasPrefix(line, "#") || strings.HasPrefix(line, ";") || strings.HasPrefix(line, "//") || strings.HasPrefix(line, "*") {
