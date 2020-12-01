@@ -3,7 +3,6 @@ package broker
 import (
 	"context"
 	"errors"
-	"github.com/eapache/queue"
 	"math/rand"
 	"net"
 	"reflect"
@@ -12,9 +11,11 @@ import (
 	"sync"
 	"time"
 
-	"github.com/fhmq/hmq/broker/lib/sessions"
-	"github.com/fhmq/hmq/broker/lib/topics"
-	"github.com/fhmq/hmq/plugins/bridge"
+	"github.com/eapache/queue"
+
+	"github.com/turtletramp/hmq/broker/lib/sessions"
+	"github.com/turtletramp/hmq/broker/lib/topics"
+	"github.com/turtletramp/hmq/plugins/bridge"
 	"golang.org/x/net/websocket"
 
 	"github.com/eclipse/paho.mqtt.golang/packets"
